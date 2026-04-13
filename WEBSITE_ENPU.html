@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业加工服务官网 - 仿制结构</title>
+    <style>
+        /* 全局样式 resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { color: #333; line-height: 1.6; background-color: #f9f9fa; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        /* 容器限制宽度 */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* 导航栏 Header */
+        header { background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: bold; color: #0056b3; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #0056b3; }
+        
+        /* 右侧操作区组合 */
+        .header-actions { display: flex; gap: 15px; align-items: center; }
+        .btn-quote { background-color: #0056b3; color: #fff; padding: 10px 20px; border-radius: 4px; font-weight: bold; }
+        .btn-quote:hover { background-color: #004494; color: #fff; }
+        
+        /* 语言切换按钮 */
+        .btn-lang { background-color: transparent; color: #0056b3; border: 1px solid #0056b3; padding: 8px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .btn-lang:hover { background-color: #0056b3; color: #fff; }
+
+        /* 首屏 Hero Section */
+        .hero { background-color: #001f3f; color: #fff; padding: 100px 20px; text-align: center; }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; }
+        .hero p { font-size: 18px; margin-bottom: 30px; color: #ccc; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .hero .btn-main { background-color: #ff6600; color: #fff; padding: 15px 30px; font-size: 18px; border-radius: 4px; display: inline-block; }
+
+        /* 通用区块标题 */
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 32px; color: #222; }
+        .section-title p { color: #666; margin-top: 10px; }
+
+        /* 服务卡片 Services */
+        .services { padding: 80px 0; background-color: #fff; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card img { width: 100%; height: 200px; object-fit: cover; background-color: #e0e0e0; }
+        .card-body { padding: 20px; }
+        .card-body h3 { margin-bottom: 10px; color: #0056b3; }
+        .card-body p { color: #666; font-size: 14px; margin-bottom: 15px; }
+
+        /* 关于与优势 Advantages */
+        .advantages { padding: 80px 0; background-color: #f1f5f9; }
+        .adv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .adv-item { background: #fff; padding: 30px; border-radius: 8px; text-align: center; }
+        .adv-item h4 { margin-top: 15px; margin-bottom: 10px; font-size: 18px; }
+        .adv-item p { font-size: 14px; color: #555; }
+
+        /* 合作流程 Work with us */
+        .workflow { padding: 80px 0; background-color: #fff; }
+        .step-container { display: flex; flex-wrap: wrap; justify-content: space-between; text-align: center; gap: 20px; }
+        .step { flex: 1; min-width: 200px; padding: 20px; }
+        .step-number { display: inline-block; width: 40px; height: 40px; line-height: 40px; background-color: #0056b3; color: #fff; border-radius: 50%; font-size: 20px; font-weight: bold; margin-bottom: 15px; }
+
+        /* 页脚 Footer */
+        footer { background-color: #1a1a1a; color: #ccc; padding: 60px 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 18px; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a:hover { color: #fff; }
+        .footer-bottom { border-top: 1px solid #333; padding-top: 20px; text-align: center; font-size: 14px; }
+
+        /* ================= 语言切换核心样式 ================= */
+        /* 默认显示英文，隐藏中文 */
+        .lang-zh { display: none; }
+        .lang-en { display: inherit; }
+
+        /* 当body拥有zh类时，显示中文，隐藏英文 */
+        body.zh .lang-zh { display: inherit; }
+        body.zh .lang-en { display: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="lang-en">Enpu Machinery</span>
+                <span class="lang-zh">恩普机械</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#home">
+                    <span class="lang-en">Home</span>
+                    <span class="lang-zh">首页</span>
+                </a>
+                <a href="#services">
+                    <span class="lang-en">Services</span>
+                    <span class="lang-zh">服务项目</span>
+                </a>
+                <a href="#cases">
+                    <span class="lang-en">Case Studies</span>
+                    <span class="lang-zh">客户案例</span>
+                </a>
+                <a href="#about">
+                    <span class="lang-en">About Us</span>
+                    <span class="lang-zh">关于我们</span>
+                </a>
+                <a href="#contact">
+                    <span class="lang-en">Contact</span>
+                    <span class="lang-zh">联系我们</span>
+                </a>
+            </nav>
+            <div class="header-actions">
+                <a href="#quote" class="btn-quote">
+                    <span class="lang-en">Get a Quote</span>
+                    <span class="lang-zh">获取报价</span>
+                </a>
+                <button id="lang-toggle" class="btn-lang">中文 / EN</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>
+                <span class="lang-en">Professional CNC Machining Service Online</span>
+                <span class="lang-zh">专业在线 CNC 数控加工服务</span>
+            </h1>
+            <p>
+                <span class="lang-en">20+ Years Manufacturer. Providing High Precision Machining, Turning, Milling, and Die Casting services. ISO 9001:2015 Certified.</span>
+                <span class="lang-zh">20余年制造经验。提供高精度机加工、车削、铣削及压铸服务。通过 ISO 9001:2015 质量体系认证。</span>
+            </p>
+            <a href="#quote" class="btn-main">
+                <span class="lang-en">Start Your Project</span>
+                <span class="lang-zh">开启您的项目</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>
+                    <span class="lang-en">Our Services</span>
+                    <span class="lang-zh">我们的服务</span>
+                </h2>
+                <p>
+                    <span class="lang-en">Manufactured metal parts on technical drawings with fast turnaround.</span>
+                    <span class="lang-zh">严格按照技术图纸制造金属零件，交付周期短。</span>
+                </p>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x250?text=CNC+Machining" alt="CNC Machining">
+                    <div class="card-body">
+                        <h3>
+                            <span class="lang-en">CNC Machining</span>
+                            <span class="lang-zh">CNC 数控加工</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">3-axis, 4-axis, 5-axis CNC machining equipment with advanced process helps you to achieve from design to machined parts.</span>
+                            <span class="lang-zh">配备先进工艺的3轴、4轴、5轴数控加工设备，帮助您完成从设计到成品零件的跨越。</span>
+                        </p>
+                        <a href="#" style="color: #0056b3; font-weight: bold;">
+                            <span class="lang-en">Learn More &rarr;</span>
+                            <span class="lang-zh">了解更多 &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x250?text=CNC+Turning" alt="CNC Turning">
+                    <div class="card-body">
+                        <h3>
+                            <span class="lang-en">CNC Turning</span>
+                            <span class="lang-zh">CNC 数控车削</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Can quickly CNC Turned Parts more than 50 materials, metals and plastics, whether it is large or small parts.</span>
+                            <span class="lang-zh">无论大小零件，皆可快速完成50多种金属和塑料材料的车削加工。</span>
+                        </p>
+                        <a href="#" style="color: #0056b3; font-weight: bold;">
+                            <span class="lang-en">Learn More &rarr;</span>
+                            <span class="lang-zh">了解更多 &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x250?text=Die+Casting" alt="Die Casting">
+                    <div class="card-body">
+                        <h3>
+                            <span class="lang-en">Die Casting Service</span>
+                            <span class="lang-zh">压铸服务</span>
+                        </h3>
+                        <p>
+                            <span class="lang-en">Die casting is the process of choice when producing high volumes of complex metal parts. Cheap price.</span>
+                            <span class="lang-zh">大批量生产复杂金属零件的理想工艺选择。性价比极高。</span>
+                        </p>
+                        <a href="#" style="color: #0056b3; font-weight: bold;">
+                            <span class="lang-en">Learn More &rarr;</span>
+                            <span class="lang-zh">了解更多 &rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="advantages" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>
+                    <span class="lang-en">Our Advantages</span>
+                    <span class="lang-zh">我们的核心优势</span>
+                </h2>
+                <p>
+                    <span class="lang-en">Why choose us for Custom Parts Manufacturing</span>
+                    <span class="lang-zh">为什么选择我们作为您的定制零件制造商</span>
+                </p>
+            </div>
+            <div class="adv-grid">
+                <div class="adv-item">
+                    <h4>
+                        <span class="lang-en">Quality Assurance</span>
+                        <span class="lang-zh">质量保证</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">ISO 9001:2015 & IATF16949 Certified. Strict quality control system in house.</span>
+                        <span class="lang-zh">通过 ISO 9001:2015 及 IATF16949 认证。内部设有严格的质量控制体系。</span>
+                    </p>
+                </div>
+                <div class="adv-item">
+                    <h4>
+                        <span class="lang-en">Free Instant Quote</span>
+                        <span class="lang-zh">免费即时报价</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">Get pricing, freight, and optimal processing methods within 24 hours.</span>
+                        <span class="lang-zh">24小时内获取产品报价、运费明细及最佳加工方案。</span>
+                    </p>
+                </div>
+                <div class="adv-item">
+                    <h4>
+                        <span class="lang-en">Factory Direct Price</span>
+                        <span class="lang-zh">源头工厂价格</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">In-house facilities, no middlemen. Providing cheaper and faster solutions.</span>
+                        <span class="lang-zh">自有生产设备，拒绝中间商赚差价。提供更经济快捷的解决方案。</span>
+                    </p>
+                </div>
+                <div class="adv-item">
+                    <h4>
+                        <span class="lang-en">Fast Turnaround</span>
+                        <span class="lang-zh">快速交付周期</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">Flexible production systems allow us to ship parts in as fast as 1 day.</span>
+                        <span class="lang-zh">灵活的生产调度系统，最快1天即可安排发货。</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow" id="workflow">
+        <div class="container">
+            <div class="section-title">
+                <h2>
+                    <span class="lang-en">How to Work With Us?</span>
+                    <span class="lang-zh">合作流程</span>
+                </h2>
+                <p>
+                    <span class="lang-en">4 simple steps to get your parts manufactured</span>
+                    <span class="lang-zh">只需简单的4个步骤，即可完成零件制造</span>
+                </p>
+            </div>
+            <div class="step-container">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h4>
+                        <span class="lang-en">Upload a CAD File</span>
+                        <span class="lang-zh">上传 CAD 文件</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">Select a manufacturing process and upload your 3D CAD file.</span>
+                        <span class="lang-zh">选择所需的制造工艺并上传您的 3D CAD 模型文件。</span>
+                    </p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h4>
+                        <span class="lang-en">Online Quote</span>
+                        <span class="lang-zh">获取在线报价</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">We'll send you DFM analysis and real-time pricing in 24 hours.</span>
+                        <span class="lang-zh">我们将在24小时内为您提供可制造性(DFM)分析及精确报价。</span>
+                    </p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h4>
+                        <span class="lang-en">Manufacturing</span>
+                        <span class="lang-zh">开始投入生产</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">Review your quote, place your order, and we start production.</span>
+                        <span class="lang-zh">确认报价并下单后，我们将立刻安排车间投入生产。</span>
+                    </p>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h4>
+                        <span class="lang-en">Parts Shipped</span>
+                        <span class="lang-zh">打包并出货</span>
+                    </h4>
+                    <p>
+                        <span class="lang-en">Receive your custom precision parts delivered to your door.</span>
+                        <span class="lang-zh">按时将定制的高精度零件安全送达到您的手中。</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h2 style="color: #fff; margin-bottom: 15px;">
+                        <span class="lang-en">BestParts Simulation</span>
+                        <span class="lang-zh">恩普机械制造</span>
+                    </h2>
+                    <p>
+                        <span class="lang-en">Professional online CNC machining company. One-stop rapid prototyping and OEM parts manufacturing.</span>
+                        <span class="lang-zh">专业的在线 CNC 数控加工企业。提供一站式快速手板及 OEM 零件制造服务。</span>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>
+                        <span class="lang-en">Useful Links</span>
+                        <span class="lang-zh">快捷链接</span>
+                    </h4>
+                    <ul>
+                        <li><a href="#">
+                            <span class="lang-en">Services</span>
+                            <span class="lang-zh">服务项目</span>
+                        </a></li>
+                        <li><a href="#">
+                            <span class="lang-en">Case Studies</span>
+                            <span class="lang-zh">客户案例</span>
+                        </a></li>
+                        <li><a href="#">
+                            <span class="lang-en">Equipment & Team</span>
+                            <span class="lang-zh">设备与团队</span>
+                        </a></li>
+                        <li><a href="#">
+                            <span class="lang-en">Testimonials</span>
+                            <span class="lang-zh">客户评价</span>
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>
+                        <span class="lang-en">Contact Details</span>
+                        <span class="lang-zh">联系方式</span>
+                    </h4>
+                    <ul>
+                        <li>
+                            <span class="lang-en">Email: info@example.com</span>
+                            <span class="lang-zh">邮箱：info@example.com</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Phone: +86 123 4567 8900</span>
+                            <span class="lang-zh">电话：+86 123 4567 8900</span>
+                        </li>
+                        <li>
+                            <span class="lang-en">Opening Time: Mon - Sat: 9am to 6pm</span>
+                            <span class="lang-zh">营业时间：周一至周六 9:00 - 18:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="lang-en">&copy; 2024 Your Company Name. All Rights Reserved.</span>
+                <span class="lang-zh">&copy; 2024 恩普机械制造有限公司 保留所有权利.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btnLang = document.getElementById('lang-toggle');
+        
+        btnLang.addEventListener('click', function() {
+            // 切换 body 的 'zh' class
+            document.body.classList.toggle('zh');
+            
+            // 选填：切换按钮上的文本提示
+            if (document.body.classList.contains('zh')) {
+                btnLang.textContent = 'EN / 中文';
+            } else {
+                btnLang.textContent = '中文 / EN';
+            }
+        });
+    </script>
+</body>
+</html>
