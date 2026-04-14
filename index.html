@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>企业加工服务官网 - 仿制结构</title>
     <style>
-        /* 全局样式 resets */
+        /* ================= 全局样式 resets ================= */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { color: #333; line-height: 1.6; background-color: #f9f9fa; }
         a { text-decoration: none; color: inherit; }
@@ -14,7 +14,7 @@
         /* 容器限制宽度 */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* 导航栏 Header */
+        /* ================= 导航栏 Header ================= */
         header { background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; max-width: 1200px; margin: 0 auto; }
         .logo { font-size: 24px; font-weight: bold; color: #0056b3; }
@@ -24,25 +24,22 @@
         
         /* 右侧操作区组合 */
         .header-actions { display: flex; gap: 15px; align-items: center; }
-        .btn-quote { background-color: #0056b3; color: #fff; padding: 10px 20px; border-radius: 4px; font-weight: bold; }
-        .btn-quote:hover { background-color: #004494; color: #fff; }
-        
-        /* 语言切换按钮 */
         .btn-lang { background-color: transparent; color: #0056b3; border: 1px solid #0056b3; padding: 8px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .btn-lang:hover { background-color: #0056b3; color: #fff; }
 
-        /* 首屏 Hero Section */
+        /* ================= 首屏 Hero Section ================= */
         .hero { background-color: #001f3f; color: #fff; padding: 100px 20px; text-align: center; }
         .hero h1 { font-size: 48px; margin-bottom: 20px; }
         .hero p { font-size: 18px; margin-bottom: 30px; color: #ccc; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .hero .btn-main { background-color: #ff6600; color: #fff; padding: 15px 30px; font-size: 18px; border-radius: 4px; display: inline-block; }
+        .hero .btn-main { background-color: #ff6600; color: #fff; padding: 15px 30px; font-size: 18px; border-radius: 4px; display: inline-block; border: none; cursor: pointer; transition: background 0.3s;}
+        .hero .btn-main:hover { background-color: #e65c00; }
 
-        /* 通用区块标题 */
+        /* ================= 通用区块标题 ================= */
         .section-title { text-align: center; margin-bottom: 50px; }
         .section-title h2 { font-size: 32px; color: #222; }
         .section-title p { color: #666; margin-top: 10px; }
 
-        /* 服务卡片 Services */
+        /* ================= 服务卡片 Services ================= */
         .services { padding: 80px 0; background-color: #fff; }
         .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
@@ -52,20 +49,20 @@
         .card-body h3 { margin-bottom: 10px; color: #0056b3; }
         .card-body p { color: #666; font-size: 14px; margin-bottom: 15px; }
 
-        /* 关于与优势 Advantages */
+        /* ================= 关于与优势 Advantages ================= */
         .advantages { padding: 80px 0; background-color: #f1f5f9; }
         .adv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .adv-item { background: #fff; padding: 30px; border-radius: 8px; text-align: center; }
         .adv-item h4 { margin-top: 15px; margin-bottom: 10px; font-size: 18px; }
         .adv-item p { font-size: 14px; color: #555; }
 
-        /* 合作流程 Work with us */
+        /* ================= 合作流程 Work with us ================= */
         .workflow { padding: 80px 0; background-color: #fff; }
         .step-container { display: flex; flex-wrap: wrap; justify-content: space-between; text-align: center; gap: 20px; }
         .step { flex: 1; min-width: 200px; padding: 20px; }
         .step-number { display: inline-block; width: 40px; height: 40px; line-height: 40px; background-color: #0056b3; color: #fff; border-radius: 50%; font-size: 20px; font-weight: bold; margin-bottom: 15px; }
 
-        /* 页脚 Footer */
+        /* ================= 页脚 Footer ================= */
         footer { background-color: #1a1a1a; color: #ccc; padding: 60px 0 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
         .footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 18px; }
@@ -74,13 +71,44 @@
         .footer-bottom { border-top: 1px solid #333; padding-top: 20px; text-align: center; font-size: 14px; }
 
         /* ================= 语言切换核心样式 ================= */
-        /* 默认显示英文，隐藏中文 */
         .lang-zh { display: none; }
         .lang-en { display: inherit; }
-
-        /* 当body拥有zh类时，显示中文，隐藏英文 */
         body.zh .lang-zh { display: inherit; }
         body.zh .lang-en { display: none; }
+
+        /* ================= 模态框与拖拽区域样式 ================= */
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-content {
+            background-color: #fff; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px;
+            position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(-20px); transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; color: #999; cursor: pointer; transition: color 0.3s; }
+        .close-modal:hover { color: #333; }
+        
+        .drop-zone {
+            border: 2px dashed #0056b3; border-radius: 8px; padding: 40px 20px; text-align: center; margin: 20px 0;
+            background-color: #f8faff; cursor: pointer; transition: all 0.3s ease;
+        }
+        .drop-zone.dragover { background-color: #e6f0ff; border-color: #ff6600; }
+        .drop-zone p { color: #0056b3; font-weight: bold; margin-bottom: 5px; }
+        .drop-zone span { font-size: 14px; color: #666; }
+        
+        .file-list { max-height: 150px; overflow-y: auto; margin-bottom: 20px; }
+        .file-item { display: flex; justify-content: space-between; align-items: center; background: #f1f5f9; padding: 10px; border-radius: 4px; margin-bottom: 10px; font-size: 14px; }
+        .file-item .remove-btn { color: #dc3545; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -92,32 +120,13 @@
                 <span class="lang-zh">恩普机械</span>
             </div>
             <nav class="nav-links">
-                <a href="#home">
-                    <span class="lang-en">Home</span>
-                    <span class="lang-zh">首页</span>
-                </a>
-                <a href="#services">
-                    <span class="lang-en">Services</span>
-                    <span class="lang-zh">服务项目</span>
-                </a>
-                <a href="#cases">
-                    <span class="lang-en">Case Studies</span>
-                    <span class="lang-zh">客户案例</span>
-                </a>
-                <a href="#about">
-                    <span class="lang-en">About Us</span>
-                    <span class="lang-zh">关于我们</span>
-                </a>
-                <a href="#contact">
-                    <span class="lang-en">Contact</span>
-                    <span class="lang-zh">联系我们</span>
-                </a>
+                <a href="#home"><span class="lang-en">Home</span><span class="lang-zh">首页</span></a>
+                <a href="#services"><span class="lang-en">Services</span><span class="lang-zh">服务项目</span></a>
+                <a href="#cases"><span class="lang-en">Case Studies</span><span class="lang-zh">客户案例</span></a>
+                <a href="#about"><span class="lang-en">About Us</span><span class="lang-zh">关于我们</span></a>
+                <a href="#contact"><span class="lang-en">Contact</span><span class="lang-zh">联系我们</span></a>
             </nav>
             <div class="header-actions">
-                <a href="#quote" class="btn-quote">
-                    <span class="lang-en">Get a Quote</span>
-                    <span class="lang-zh">获取报价</span>
-                </a>
                 <button id="lang-toggle" class="btn-lang">中文 / EN</button>
             </div>
         </div>
@@ -133,10 +142,10 @@
                 <span class="lang-en">20+ Years Manufacturer. Providing High Precision Machining, Turning, Milling, and Die Casting services. ISO 9001:2015 Certified.</span>
                 <span class="lang-zh">20余年制造经验。提供高精度机加工、车削、铣削及压铸服务。通过 ISO 9001:2015 质量体系认证。</span>
             </p>
-            <a href="#quote" class="btn-main">
+            <button id="btn-start-project" class="btn-main">
                 <span class="lang-en">Start Your Project</span>
                 <span class="lang-zh">开启您的项目</span>
-            </a>
+            </button>
         </div>
     </section>
 
@@ -345,22 +354,10 @@
                         <span class="lang-zh">快捷链接</span>
                     </h4>
                     <ul>
-                        <li><a href="#">
-                            <span class="lang-en">Services</span>
-                            <span class="lang-zh">服务项目</span>
-                        </a></li>
-                        <li><a href="#">
-                            <span class="lang-en">Case Studies</span>
-                            <span class="lang-zh">客户案例</span>
-                        </a></li>
-                        <li><a href="#">
-                            <span class="lang-en">Equipment & Team</span>
-                            <span class="lang-zh">设备与团队</span>
-                        </a></li>
-                        <li><a href="#">
-                            <span class="lang-en">Testimonials</span>
-                            <span class="lang-zh">客户评价</span>
-                        </a></li>
+                        <li><a href="#"><span class="lang-en">Services</span><span class="lang-zh">服务项目</span></a></li>
+                        <li><a href="#"><span class="lang-en">Case Studies</span><span class="lang-zh">客户案例</span></a></li>
+                        <li><a href="#"><span class="lang-en">Equipment & Team</span><span class="lang-zh">设备与团队</span></a></li>
+                        <li><a href="#"><span class="lang-en">Testimonials</span><span class="lang-zh">客户评价</span></a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -391,18 +388,153 @@
         </div>
     </footer>
 
-    <script>
-        const btnLang = document.getElementById('lang-toggle');
-        
-        btnLang.addEventListener('click', function() {
-            // 切换 body 的 'zh' class
-            document.body.classList.toggle('zh');
+    <div id="upload-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <h2 style="margin-bottom: 10px;">
+                <span class="lang-en">Upload CAD Files</span>
+                <span class="lang-zh">上传 CAD 文件</span>
+            </h2>
+            <p style="color: #666; font-size: 14px;">
+                <span class="lang-en">Please upload your 2D/3D drawings for a quote.</span>
+                <span class="lang-zh">请上传您的 2D/3D 图纸以获取报价。</span>
+            </p>
             
-            // 选填：切换按钮上的文本提示
-            if (document.body.classList.contains('zh')) {
-                btnLang.textContent = 'EN / 中文';
-            } else {
-                btnLang.textContent = '中文 / EN';
+            <div class="drop-zone" id="drop-zone">
+                <p>
+                    <span class="lang-en">Drag & Drop files here</span>
+                    <span class="lang-zh">将文件拖拽至此处</span>
+                </p>
+                <span>
+                    <span class="lang-en">or click to browse</span>
+                    <span class="lang-zh">或点击浏览文件</span>
+                </span>
+                <input type="file" id="file-input" multiple style="display: none;">
+            </div>
+
+            <div class="file-list" id="file-list"></div>
+
+            <button id="btn-submit-files" class="btn-main" style="width: 100%;">
+                <span class="lang-en">Send Request to Email</span>
+                <span class="lang-zh">发送请求至邮箱</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 1. 中英文切换逻辑
+        const btnLang = document.getElementById('lang-toggle');
+        btnLang.addEventListener('click', function() {
+            document.body.classList.toggle('zh');
+            btnLang.textContent = document.body.classList.contains('zh') ? 'EN / 中文' : '中文 / EN';
+        });
+
+        // 2. 模态框打开与关闭逻辑
+        const modal = document.getElementById('upload-modal');
+        const btnStart = document.getElementById('btn-start-project');
+        const btnClose = document.getElementById('close-modal');
+
+        btnStart.addEventListener('click', () => modal.classList.add('active'));
+        btnClose.addEventListener('click', () => modal.classList.remove('active'));
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // 3. 拖拽与选择文件逻辑
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileListContainer = document.getElementById('file-list');
+        let uploadedFiles = []; 
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, e => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+
+        ['dragenter', 'dragover'].forEach(eventName => dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false));
+        ['dragleave', 'drop'].forEach(eventName => dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false));
+
+        dropZone.addEventListener('drop', (e) => handleFiles(e.dataTransfer.files));
+
+        function handleFiles(files) {
+            uploadedFiles = [...uploadedFiles, ...Array.from(files)];
+            renderFileList();
+        }
+
+        function renderFileList() {
+            fileListContainer.innerHTML = '';
+            uploadedFiles.forEach((file, index) => {
+                const div = document.createElement('div');
+                div.className = 'file-item';
+                div.innerHTML = `
+                    <span>${file.name} (${(file.size / 1024).toFixed(1)} KB)</span>
+                    <span class="remove-btn" onclick="removeFile(${index})">×</span>
+                `;
+                fileListContainer.appendChild(div);
+            });
+        }
+
+        window.removeFile = function(index) {
+            uploadedFiles.splice(index, 1);
+            renderFileList();
+        }
+
+        // 4. 真实提交至后端接口逻辑
+        const btnSubmit = document.getElementById('btn-submit-files');
+        
+        btnSubmit.addEventListener('click', async () => {
+            // 前置检查：是否选择了文件
+            if (uploadedFiles.length === 0) {
+                const isZh = document.body.classList.contains('zh');
+                alert(isZh ? "请先上传至少一个文件！" : "Please upload at least one file!");
+                return;
+            }
+
+            const isZh = document.body.classList.contains('zh');
+            
+            // 变更按钮状态为防抖与加载中
+            btnSubmit.textContent = isZh ? "正在发送..." : "Sending...";
+            btnSubmit.style.opacity = "0.7";
+            btnSubmit.disabled = true;
+
+            // 构造 multipart/form-data
+            const formData = new FormData();
+            uploadedFiles.forEach(file => {
+                formData.append('attachments', file); // 此处的 'attachments' 对应后端 multer 设置
+            });
+
+            try {
+                // 发起真实的 Fetch 请求 (注意：部署到线上时，需将这里的 URL 改为你的生产环境服务器地址)
+                const response = await fetch('http://localhost:3000/api/send-quote', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    alert(isZh ? "文件上传成功！我们会尽快通过邮件回复您。" : "Files uploaded successfully! We will contact you soon.");
+                    
+                    // 成功后清空数据并关闭弹窗
+                    uploadedFiles = [];
+                    renderFileList();
+                    modal.classList.remove('active');
+                } else {
+                    // 后端返回错误状态
+                    throw new Error(result.message || "发送失败");
+                }
+            } catch (error) {
+                console.error('上传出错:', error);
+                alert(isZh ? "发送失败，请检查网络或稍后再试。" : "Failed to send, please check your network or try again later.");
+            } finally {
+                // 无论成功失败，恢复按钮的原始状态
+                btnSubmit.style.opacity = "1";
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = isZh ? 
+                    '<span class="lang-zh" style="display:inherit">发送请求至邮箱</span><span class="lang-en" style="display:none">Send Request to Email</span>' : 
+                    '<span class="lang-en" style="display:inherit">Send Request to Email</span><span class="lang-zh" style="display:none">发送请求至邮箱</span>';
             }
         });
     </script>
